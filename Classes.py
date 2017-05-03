@@ -11,6 +11,8 @@ class Person:
 
 class Student(Person):
 
+    objects = []
+
     def __init__(self, firstname, lastname, pesel, studentID):
         super().__init__(firstname, lastname, pesel)
         self.studentID = studentID
