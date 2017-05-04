@@ -6,19 +6,17 @@ class Person:
         self.pesel = pesel
 
     def __str__(self):
-        return self.firstname + " " + self.lastname + " " + self.pesel
+        return "Imię: " + self.firstname + " Nazwisko: " + self.lastname + " Pesel: " + self.pesel
 
 
 class Student(Person):
-
-    objects = []
 
     def __init__(self, firstname, lastname, pesel, studentID):
         super().__init__(firstname, lastname, pesel)
         self.studentID = studentID
 
     def __str__(self):
-        return super().__str__() + " " + self.studentID
+        return super().__str__() + " Numer indeksu: " + self.studentID
 
 
 class Employee(Person):
@@ -28,7 +26,7 @@ class Employee(Person):
         self.studentID = salary
 
     def __str__(self):
-        return super().__str__() + " " + self.salary
+        return super().__str__() + " Wynagrodzenie: " + self.salary
 
 
 class ITEmployee(Employee):
@@ -48,6 +46,9 @@ class MathEmployee(Employee):
 
 
 class DailyStudent(Student):
+
+    dailyStudentList = []
+
     def __init__(self, firstname, lastname, pesel, studentID):
         super().__init__(firstname, lastname, pesel, studentID)
 
@@ -56,6 +57,9 @@ class DailyStudent(Student):
 
 
 class WeekendStudent(Student):
+
+    weekendStudentList = []
+
     def __init__(self, firstname, lastname, pesel, studentID):
         super().__init__(firstname, lastname, pesel, studentID)
 
@@ -69,7 +73,7 @@ class Subjects:
         self.subjectID = subjectID
 
     def __str__(self):
-        return self.subjectName + " " + self.subjectID
+        return "Nazwa przedmiotu: " + self.subjectName + " Oznaczenie przedmiotu: " + self.subjectID
 
 
 class SubjectGroups:
@@ -81,7 +85,4 @@ class SubjectGroups:
         self.nameOfStudents = nameOfStudents
 
     def __str__(self):
-        return self.subjectGroupName + " " + self.subjectGroupID + " " + self.studiesType + " " + self.teacherName + " " + self.nameOfStudents
-
-z = DailyStudent("test", "kappa", "123", "2435")
-print(z)
+        return "Nazwa grupy przedmiotowej: " + self.subjectGroupName + " Oznaczenie grupy przedmiotowej: " + self.subjectGroupID + " Rodzaj studiów: " + self.studiesType + " Imię i nazwisko prowadzącego: " + self.teacherName + " Imiona i nazwiska studentów: " + self.nameOfStudents
