@@ -6,7 +6,7 @@ class Person:
         self.pesel = pesel
 
     def __str__(self):
-        return "Imię: " + self.firstname + " Nazwisko: " + self.lastname + " Pesel: " + self.pesel
+        return "Imie: " + self.firstname + " Nazwisko: " + self.lastname + " Pesel: " + self.pesel
 
 
 class Student(Person):
@@ -23,13 +23,16 @@ class Employee(Person):
 
     def __init__(self, firstname, lastname, pesel, salary):
         super().__init__(firstname, lastname, pesel)
-        self.studentID = salary
+        self.salary = salary
 
     def __str__(self):
         return super().__str__() + " Wynagrodzenie: " + self.salary
 
 
 class ITEmployee(Employee):
+
+    itEmployeeList = []
+
     def __init__(self, firstname, lastname, pesel, salary):
         super().__init__(firstname, lastname, pesel, salary)
 
@@ -38,6 +41,9 @@ class ITEmployee(Employee):
 
 
 class MathEmployee(Employee):
+
+    mathEmployeeList = []
+
     def __init__(self, firstname, lastname, pesel, salary):
         super().__init__(firstname, lastname, pesel, salary)
 
@@ -85,4 +91,4 @@ class SubjectGroups:
         self.nameOfStudents = nameOfStudents
 
     def __str__(self):
-        return "Nazwa grupy przedmiotowej: " + self.subjectGroupName + " Oznaczenie grupy przedmiotowej: " + self.subjectGroupID + " Rodzaj studiów: " + self.studiesType + " Imię i nazwisko prowadzącego: " + self.teacherName + " Imiona i nazwiska studentów: " + self.nameOfStudents
+        return "Nazwa grupy przedmiotowej: " + self.subjectGroupName + " Oznaczenie grupy przedmiotowej: " + self.subjectGroupID + " Rodzaj studiow: " + self.studiesType + " Imie i nazwisko prowadzącego: " + self.teacherName + " Imiona i nazwiska studentów: " + self.nameOfStudents
