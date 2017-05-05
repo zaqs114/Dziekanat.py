@@ -445,8 +445,11 @@ def subject_groups():
         edit_information_menu()
     if choice == "1":
         os.system('cls')
-        subjectName = input("Podaj nazwe przedmiotu:")
-        subjectID = input("Podaj oznaczenie przedmiotu: ")
+        subjectGroupName = input("Podaj nazwe przedmiotu:")
+        studiesType = input("Podaj rodzaj studiów: ")
+        subjectGroupID = input("Podaj oznaczenie grupy")
+        teacherName = input ("Imię i nazwisko nauczyciela")
+        nameOfStudents = input("Wprowadź imiona studentów")
         Classes.Subjects.subjectList.append(Classes.Subjects(subjectName, subjectID))
         os.system('cls')
         print("Pomyślnie dodano przedmiot")
