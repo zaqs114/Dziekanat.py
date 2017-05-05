@@ -74,6 +74,9 @@ class WeekendStudent(Student):
 
 
 class Subjects:
+
+    subjectList = []
+
     def __init__(self, subjectName, subjectID):
         self.subjectName=subjectName
         self.subjectID = subjectID
@@ -83,6 +86,9 @@ class Subjects:
 
 
 class SubjectGroups:
+
+    subjectGroupsList = []
+
     def __init__(self, subjectGroupName, subjectGroupID, studiesType, teacherName, nameOfStudents):
         self.subjectGroupName = subjectGroupName
         self.subjectGroupID = subjectGroupID

@@ -29,6 +29,7 @@ def edit_information_menu():
         Wybierz 0 aby powrócić do poprzedniego menu.
         Wybierz 1 aby edytować informacje o studentach.
         Wybierz 2 aby edytować informacje o pracownikach.
+        Wybierz 3 aby edytować informacje o przedmiotach.
         """)
     if choice == "0":
         os.system('cls')
@@ -39,6 +40,9 @@ def edit_information_menu():
     if choice == "2":
         os.system('cls')
         employee_menu()
+    if choice == "3":
+        os.system('cls')
+        subjects_menu()
     else:
         os.system('cls')
         print("Wybrałeś złą wartość. Spróbuj ponownie.")
@@ -365,6 +369,123 @@ def delete_weekend_student():
         print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
         """)
         delete_weekend_student()
+
+
+def subjects_menu():
+    choice = input("""Przedmioty.
+            Wybierz 0 aby powrócić do poprzedniego menu.
+            Wybierz 1 aby dodać przedmiot.
+            Wybierz 2 aby usunąć przedmiot.
+            """)
+    if choice == "0":
+        subject_write_to_file()
+        os.system('cls')
+        edit_information_menu()
+    if choice == "1":
+        os.system('cls')
+        subjectName = input("Podaj nazwe przedmiotu:")
+        subjectID = input("Podaj oznaczenie przedmiotu: ")
+        Classes.Subjects.subjectList.append(Classes.Subjects(subjectName, subjectID))
+        os.system('cls')
+        print("Pomyślnie dodano przedmiot")
+        print()
+        subjects_menu()
+    if choice == "2":
+        os.system('cls')
+        try:
+            j = 1
+            print("Usuwanie przedmiotu.")
+            print()
+            if not Classes.Subjects.subjectList:
+                print("Nic tu nie ma!")
+                choice = input("""Wybierz cokolwiek aby powrócić.
+                """)
+                os.system('cls')
+                subjects_menu()
+
+            for i in Classes.Subjects.subjectList:
+                print(j, '. ', i)
+                j += 1
+            choice = int(input("""Wybierz pozycję którą chcesz usunąć.
+            """))
+            choice -= 1  # ponieważ liczymy od 0 a nie od 1
+            Classes.Subjects.subjectList.pop(choice)
+            os.system('cls')
+            print("Pomyślnie usunięto przedmiot.")
+            print()
+            subjects_menu()
+        except:
+            os.system('cls')
+            print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+            """)
+            subjects_menu()
+    else:
+        os.system('cls')
+        print("""Wybrałeś złą wartość. Spróbuj ponownie.
+            """)
+        subjects_menu()
+
+
+def subject_write_to_file():
+    subjects = open("przedmioty.txt", "w")
+    for i in Classes.Subjects.subjectList:
+        subjects.write(str(i) + '\n')
+    subjects.close()
+
+
+def subject_groups():
+    choice = input("""Grupy przediotowe.
+                Wybierz 0 aby powrócić do poprzedniego menu.
+                Wybierz 1 aby dodać grupe przedmiotową.
+                Wybierz 2 aby usunąć grupę przedmiotową.
+                """)
+    if choice == "0":
+        subject_group_write_to_file()
+        os.system('cls')
+        edit_information_menu()
+    if choice == "1":
+        os.system('cls')
+        subjectName = input("Podaj nazwe przedmiotu:")
+        subjectID = input("Podaj oznaczenie przedmiotu: ")
+        Classes.Subjects.subjectList.append(Classes.Subjects(subjectName, subjectID))
+        os.system('cls')
+        print("Pomyślnie dodano przedmiot")
+        print()
+        subjects_menu()
+    if choice == "2":
+        os.system('cls')
+        try:
+            j = 1
+            print("Usuwanie przedmiotu.")
+            print()
+            if not Classes.Subjects.subjectList:
+                print("Nic tu nie ma!")
+                choice = input("""Wybierz cokolwiek aby powrócić.
+                    """)
+                os.system('cls')
+                subjects_menu()
+
+            for i in Classes.Subjects.subjectList:
+                print(j, '. ', i)
+                j += 1
+            choice = int(input("""Wybierz pozycję którą chcesz usunąć.
+                """))
+            choice -= 1  # ponieważ liczymy od 0 a nie od 1
+            Classes.Subjects.subjectList.pop(choice)
+            os.system('cls')
+            print("Pomyślnie usunięto przedmiot.")
+            print()
+            subjects_menu()
+        except:
+            os.system('cls')
+            print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+            subjects_menu()
+    else:
+        os.system('cls')
+        print("""Wybrałeś złą wartość. Spróbuj ponownie.
+                """)
+        subjects_menu()
 
 
 
