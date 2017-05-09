@@ -1,6 +1,7 @@
 import Classes
 import os
 
+
 def subjects_menu():
     choice = input("""Przedmioty.
             Wybierz 0 aby powrócić do poprzedniego menu.
@@ -35,7 +36,7 @@ def subjects_menu():
                 subjects_menu()
 
             for i in Classes.Subjects.subjectList:
-                print(j, '. ', i)
+                print(j, '. ',i)
                 j += 1
             choice = int(input("""Wybierz pozycję którą chcesz usunąć.
             """))
