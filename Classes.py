@@ -39,6 +39,9 @@ class ITEmployee(Employee):
     def __str__(self):
         return super().__str__()
 
+    def return_employee(self):
+        return self.firstname + " " + self.lastname
+
 
 class MathEmployee(Employee):
 
@@ -49,6 +52,9 @@ class MathEmployee(Employee):
 
     def __str__(self):
         return super().__str__()
+
+    def return_employee(self):
+        return self.firstname + " " + self.lastname
 
 
 class DailyStudent(Student):
@@ -61,6 +67,9 @@ class DailyStudent(Student):
     def __str__(self):
         return super().__str__()
 
+    def return_student(self):
+        return self.firstname + " " + self.lastname
+
 
 class WeekendStudent(Student):
 
@@ -71,6 +80,9 @@ class WeekendStudent(Student):
 
     def __str__(self):
         return super().__str__()
+
+    def return_student(self):
+        return self.firstname + " " + self.lastname
 
 
 class Subjects:
