@@ -58,6 +58,18 @@ def subjects_menu():
         subjects_menu()
 
 
+def show_students():
+    for i in Classes.Subjects.subjectList:
+        print(i)
+    choice = int(input("""Wybierz 0 aby powrócić do poprzedniego menu.
+    """))
+    if choice == 0:
+        import Main
+        Main.show_base_menu()
+    else:
+        print("")
+
+
 def subject_write_to_file():
     subjects = open("przedmioty.txt", "w")
     for i in Classes.Subjects.subjectList:

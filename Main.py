@@ -56,6 +56,7 @@ def edit_information_menu():
         print()
         edit_information_menu()
 
+
 def show_base_menu():
     choice = input(""" Wyświetlanie bazy.
             Wybierz 0 aby powrócić do poprzedniego menu.
@@ -69,13 +70,13 @@ def show_base_menu():
         start()
     if choice == "1":
         os.system('cls')
-        Students.students_menu()
+        Students.show_students()
     if choice == "2":
         os.system('cls')
-        Employees.employee_menu()
+        Employees.show_employees()
     if choice == "3":
         os.system('cls')
-        Subjects.subjects_menu()
+        Subjects.show_students()
     if choice == "4":
         os.system('cls')
         SubjectGroups.subject_groups_menu()

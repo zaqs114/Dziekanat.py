@@ -34,6 +34,20 @@ def employee_write_to_file():
         employees.close()
 
 
+def show_employees():
+    for i in Classes.ITEmployee.itEmployeeList:
+        print(i)
+    for i in Classes.MathEmployee.mathEmployeeList:
+        print(i)
+    choice = int(input("""Wybierz 0 aby powrócić do poprzedniego menu.
+    """))
+    if choice == 0:
+        import Main
+        Main.show_base_menu()
+    else:
+        print("")
+
+
 def add_employee():
     choice = input("""Dodawanie pracownika.
 

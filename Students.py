@@ -36,6 +36,19 @@ def students_write_to_file():
     students.close()
 
 
+def show_students():
+    for i in Classes.DailyStudent.dailyStudentList:
+        print(i)
+    for i in Classes.WeekendStudent.weekendStudentList:
+        print(i)
+    choice = int(input("""Wybierz 0 aby powrócić do poprzedniego menu.
+    """))
+    if choice == 0:
+        import Main
+        Main.show_base_menu()
+    else:
+        print("")
+
 def add_student():
     choice = input("""Dodawanie studenta.
 
