@@ -70,46 +70,67 @@ def add_subject_group():
     for i in Classes.Subjects.subjectList:
         print(j, '. ', i)
         j += 1
-    choice = int(input("""Wybierz przedmiot dla którego chcesz utworzyć nową grupę..
+    try:
+        choice = int(input("""Wybierz przedmiot dla którego chcesz utworzyć nową grupę..
                 """))
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
+
     choice -= 1
     subjectGroupName = Classes.Subjects.subjectList[choice].subjectName
     subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write(subjectGroupID+"\t")
-    subjectgroups.write(subjectGroupName+"\t")
+    subjectgroups.write("Oznaczenie grupy: " + subjectGroupID+"\t")
+    subjectgroups.write("Nazwa grupy: " +subjectGroupName+"\t")
     subjectgroups.close()
 
     os.system('cls')
-    choice=int(input("""Dodawanie grupy przedmiotowej.
+    choice=input("""Dodawanie grupy przedmiotowej.
     Wybierz 1 aby dodać informatyka do grupy.
     Wybierz 2 aby dodać matematyka do grupy
-    """))
-    if choice==1:
+    """)
+    if choice=="1":
         os.system('cls')
         add_itemployee_to_group()
-        choice = int(input("""Dodawanie grupy przedmiotowej.
+        choice = input("""Dodawanie grupy przedmiotowej.
                             Wybierz 1 aby studentów dziennych do grupy.
                             Wybierz 2 aby studentów zaocznych do grupy
-                            """))
-        if choice == 1:
+                            """)
+        if choice == "1":
             add_daily_student_to_group()
 
-
-        if choice==2:
+        if choice=="2":
             add_weekend_student_to_group()
+        else:
+            os.system('cls')
+            print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                        """)
+            add_subject_group()
 
-    if choice == 2:
+    if choice == "2":
         os.system('cls')
         add_mathemployee_to_group()
-        choice = int(input("""Dodawanie grupy przedmiotowej.
+        choice = input("""Dodawanie grupy przedmiotowej.
                             Wybierz 1 aby dodać studentów dziennych do grupy.
                             Wybierz 2 aby dodać studentów zaocznych do grupy
-                            """))
-        if choice == 1:
+                            """)
+        if choice == "1":
             add_daily_student_to_group()
 
-        if choice == 2:
+        if choice == "2":
             add_weekend_student_to_group()
+        else:
+            os.system('cls')
+            print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                        """)
+            add_subject_group()
+    else:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
 
     subjectgroups = open("grupyprzedmiotowe.txt", "a")
     subjectgroups.write("\n")
@@ -125,12 +146,18 @@ def add_itemployee_to_group():
     for i in Classes.ITEmployee.itEmployeeList:
         print(j, '. ', i)
         j += 1
-    choice = int(input("""Wybierz pracownika którego chcesz dodać do grupy
+    try:
+        choice = int(input("""Wybierz pracownika którego chcesz dodać do grupy
                         """))
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
     choice -= 1
     teacherName = Classes.ITEmployee.itEmployeeList[choice].firstname + " " + Classes.ITEmployee.itEmployeeList[choice].lastname
     subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write(teacherName+"\t")
+    subjectgroups.write("Imię i nazwisko prowadzącego: " + teacherName+"\t")
     subjectgroups.close()
 
 
@@ -139,12 +166,18 @@ def add_mathemployee_to_group():
     for i in Classes.MathEmployee.mathEmployeeListt:
         print(j, '. ', i)
         j += 1
-    choice = int(input("""Wybierz pracownika którego chcesz dodać do grupy
+    try:
+        choice = int(input("""Wybierz pracownika którego chcesz dodać do grupy
                         """))
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
     choice -= 1
     teacherName = Classes.MathEmployee.mathEmployeeList[choice].firstname + " " + Classes.MathEmployee.mathEmployeeList[choice].lastname
     subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write(teacherName + "\t")
+    subjectgroups.write("Imię i nazwisko prowadzącego: " + teacherName + "\t")
     subjectgroups.close()
 
 
@@ -153,12 +186,18 @@ def add_daily_student_to_group():
     for i in Classes.DailyStudent.dailyStudentList:
         print(j, '. ', i)
         j += 1
-    choice = int(input("""Wybierz studenta którego chcesz dodać do grupy
+    try:
+        choice = int(input("""Wybierz studenta którego chcesz dodać do grupy
                 """))
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
     choice -= 1
     nameOfStudent = Classes.DailyStudent.dailyStudentList[choice].firstname + " " + Classes.DailyStudent.dailyStudentList[choice].lastname
     subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write(nameOfStudent + "\t")
+    subjectgroups.write("Imię i nazwisko studenta: " +nameOfStudent + "\t")
     subjectgroups.close()
 
     choice=input("""
@@ -166,7 +205,8 @@ def add_daily_student_to_group():
     Wybierz cokolwiek aby powrócić""")
     if choice == "1":
         add_daily_student_to_group()
-
+    else:
+        subject_groups_menu()
 
 
 def add_weekend_student_to_group():
@@ -174,47 +214,59 @@ def add_weekend_student_to_group():
     for i in Classes.WeekendStudent.weekendStudentList:
         print(j, '. ', i)
         j += 1
-    choice = int(input("""Wybierz studenta którego chcesz dodać do grupy
+    try:
+        choice = int(input("""Wybierz studenta którego chcesz dodać do grupy
                    """))
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+                """)
+        add_subject_group()
     choice -= 1
     nameOfStudent = Classes.WeekendStudent.weekendStudentList[choice].firstname + " " + Classes.WeekendStudent.weekendStudentList[choice].lastname
     subjectgroups = open("grupyprzedmiotowe.txt", "a1")
-    subjectgroups.write(nameOfStudent + "\t")
+    subjectgroups.write("Imię i nazwisko studenta: " +nameOfStudent + "\t")
     subjectgroups.close()
     choice = input("""
        Wybierz 1 aby dodać kolejnego studenta.
        Wybierz 0 aby powrócić""")
     if choice == "1":
         add_daily_student_to_group()
+    else:
+        subject_groups_menu()
 
 
 def delete_subject_group():
     print("Usuwanie grupy przedmiotowej: ")
     list = []
+    #wyswietlam
     with open("grupyprzedmiotowe.txt", "r") as textobj:
         j=1
         for i in textobj:
             print(str(j) + ". " + i)
             j=j+1
             list.append(i)
+    textobj.close()
     if not list:
         os.system('cls')
         print("Nie ma nic do usunięcia")
         subject_groups_menu()
     try:
-        choice = int(input("Wybierz którą pozycję chcesz usunąć."))
+        choice = int(input("""Wybierz którą pozycję chcesz usunąć.
+        """))
     except:
         os.system('cls')
         print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
         """)
         delete_subject_group()
 
-    list.pop(choice-1)  # delete regarding element
+    list.pop(choice-1)  #usuwam
 
-    # rewrite the textfile from list contents/elements:
+    # przepisuje
     with open("grupyprzedmiotowe.txt", "w") as textobj:
         for n in list:
             textobj.write(n)
+    textobj.close()
     os.system('cls')
     print("Pomyślnie usunięto grupe przedmiotową")
     print()
@@ -225,9 +277,11 @@ def show_subject_groups():
     with open("grupyprzedmiotowe.txt", "r") as textobj:
         for i in textobj:
             print (i)
+    textobj.close()
     choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
        """)
     if choice == "0":
+        os.system('cls')
         import Main
         Main.show_base_menu()
     else:

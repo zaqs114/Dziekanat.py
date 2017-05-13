@@ -44,6 +44,7 @@ def show_students():
     choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
     """)
     if choice == "0":
+        os.system('cls')
         import Main
         Main.show_base_menu()
     else:
