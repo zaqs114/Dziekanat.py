@@ -19,6 +19,7 @@ def start():
         os.system('cls')
         edit_information_menu()
     if choice == "2":
+        os.system('cls')
         show_base_menu()
     else:
         os.system('cls')
@@ -76,10 +77,10 @@ def show_base_menu():
         Employees.show_employees()
     if choice == "3":
         os.system('cls')
-        Subjects.show_students()
+        Subjects.show_subjects()
     if choice == "4":
         os.system('cls')
-        SubjectGroups.subject_groups_menu()
+        SubjectGroups.show_subject_groups()
     else:
         os.system('cls')
         print("Wybrałeś złą wartość. Spróbuj ponownie.")

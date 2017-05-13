@@ -58,16 +58,18 @@ def subjects_menu():
         subjects_menu()
 
 
-def show_students():
+def show_subjects():
     for i in Classes.Subjects.subjectList:
         print(i)
-    choice = int(input("""Wybierz 0 aby powrócić do poprzedniego menu.
-    """))
-    if choice == 0:
+    choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
+    """)
+    if choice == "0":
         import Main
         Main.show_base_menu()
     else:
-        print("")
+        os.system('cls')
+        print("Wybrano nieprawidłową wartość. Spróbuj ponownie")
+        show_subjects()
 
 
 def subject_write_to_file():

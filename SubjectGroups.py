@@ -121,10 +121,6 @@ def add_subject_group():
 
 
 def add_itemployee_to_group():
-    if not Classes.ITEmployee.itEmployeeList:
-        os.system('cls')
-        print("W bazie nie ma żadnych pracowników. Dodaj ich, i spróbuj ponownie.")
-        subject_groups_menu()
     j = 1
     for i in Classes.ITEmployee.itEmployeeList:
         print(j, '. ', i)
@@ -139,10 +135,6 @@ def add_itemployee_to_group():
 
 
 def add_mathemployee_to_group():
-    if not Classes.MathEmployee.mathEmployeeList:
-        os.system('cls')
-        print("W bazie nie ma żadnych pracowników. Dodaj ich, i spróbuj ponownie.")
-        subject_groups_menu()
     j = 1
     for i in Classes.MathEmployee.mathEmployeeListt:
         print(j, '. ', i)
@@ -157,10 +149,6 @@ def add_mathemployee_to_group():
 
 
 def add_daily_student_to_group():
-    if not Classes.DailyStudent.dailyStudentList:
-        os.system('cls')
-        print("W bazie nie ma żadnych studentów dziennych. Dodaj ich, i spróbuj ponownie.")
-        subject_groups_menu()
     j = 1
     for i in Classes.DailyStudent.dailyStudentList:
         print(j, '. ', i)
@@ -182,10 +170,6 @@ def add_daily_student_to_group():
 
 
 def add_weekend_student_to_group():
-    if not Classes.WeekendStudent.weekendStudentList:
-        os.system('cls')
-        print("W bazie nie ma żadnych studentów dziennych. Dodaj ich, i spróbuj ponownie.")
-        subject_groups_menu()
     j = 1
     for i in Classes.WeekendStudent.weekendStudentList:
         print(j, '. ', i)
@@ -214,8 +198,18 @@ def delete_subject_group():
             j=j+1
             list.append(i)
     if not list:
+        os.system('cls')
+        print("Nie ma nic do usunięcia")
+        subject_groups_menu()
+    try:
         choice = int(input("Wybierz którą pozycję chcesz usunąć."))
-        list.pop(choice-1)  # delete regarding element
+    except:
+        os.system('cls')
+        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+        """)
+        delete_subject_group()
+
+    list.pop(choice-1)  # delete regarding element
 
     # rewrite the textfile from list contents/elements:
     with open("grupyprzedmiotowe.txt", "w") as textobj:
@@ -225,3 +219,18 @@ def delete_subject_group():
     print("Pomyślnie usunięto grupe przedmiotową")
     print()
     subject_groups_menu()
+
+
+def show_subject_groups():
+    with open("grupyprzedmiotowe.txt", "r") as textobj:
+        for i in textobj:
+            print (i)
+    choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
+       """)
+    if choice == "0":
+        import Main
+        Main.show_base_menu()
+    else:
+        os.system('cls')
+        print("Wybrano nieprawidłową wartość. Spróbuj ponownie")
+        show_subject_groups()

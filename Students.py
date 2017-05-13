@@ -41,13 +41,15 @@ def show_students():
         print(i)
     for i in Classes.WeekendStudent.weekendStudentList:
         print(i)
-    choice = int(input("""Wybierz 0 aby powrócić do poprzedniego menu.
-    """))
-    if choice == 0:
+    choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
+    """)
+    if choice == "0":
         import Main
         Main.show_base_menu()
     else:
-        print("")
+        os.system('cls')
+        print("Wybrano nieprawidłową wartość. Spróbuj ponownie")
+        show_students()
 
 def add_student():
     choice = input("""Dodawanie studenta.
