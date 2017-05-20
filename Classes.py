@@ -103,7 +103,6 @@ class Subjects:
 class SubjectGroups:
 
     subjectGroupsList = []
-    str1 = ''.join(subjectGroupsList)
 
     def __init__(self, subjectGroupName, subjectGroupID, studiesType, teacherName, nameOfStudents = []):
         self.subjectGroupName = subjectGroupName
@@ -113,5 +112,5 @@ class SubjectGroups:
         self.nameOfStudents = nameOfStudents
 
     def __str__(self):
-        return "Nazwa grupy przedmiotowej: " + self.subjectGroupName + " Oznaczenie grupy przedmiotowej: " + self.subjectGroupID + " Rodzaj studiow: " + self.studiesType + " Imie i nazwisko prowadzącego: " + self.teacherName + " Imiona i nazwiska studentów: " + self.str1
+        return "Nazwa grupy przedmiotowej: " + self.subjectGroupName + " Oznaczenie grupy przedmiotowej: " + self.subjectGroupID + " Rodzaj studiow: " + self.studiesType + " Imie i nazwisko prowadzącego: " + self.teacherName + " Imiona i nazwiska studnetów: " + ' '.join(self.nameOfStudents)
 

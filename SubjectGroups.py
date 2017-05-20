@@ -3,6 +3,7 @@ import os
 
 
 def subject_groups_menu():
+    subject_groups_write_to_file()
     choice = input("""Grupy przediotowe.
                 Wybierz 0 aby powrócić do poprzedniego menu.
                 Wybierz 1 aby dodać grupe przedmiotową.
@@ -60,11 +61,6 @@ def add_subject_group():
     print("Dodawanie grupy przedmiotowej.")
     subjectGroupID=input("""Wprowadź oznaczenie grupy
     """)
-    if not Classes.Subjects.subjectList:
-        choice = input("""W bazie nie ma żadnego przedmiotu. Dodaj jakiś i spróbuj ponownie. Wybierz cokolwiek aby powrócić.
-                    """)
-        os.system('cls')
-        subject_groups_menu()
 
     j = 1
     for i in Classes.Subjects.subjectList:
@@ -81,10 +77,7 @@ def add_subject_group():
 
     choice -= 1
     subjectGroupName = Classes.Subjects.subjectList[choice].subjectName
-    subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write("Oznaczenie grupy: " + subjectGroupID+"\t")
-    subjectgroups.write("Nazwa grupy: " +subjectGroupName+"\t")
-    subjectgroups.close()
+
 
     os.system('cls')
     choice=input("""Dodawanie grupy przedmiotowej.
@@ -93,16 +86,19 @@ def add_subject_group():
     """)
     if choice=="1":
         os.system('cls')
-        add_itemployee_to_group()
+        teacherName = add_itemployee_to_group()
         choice = input("""Dodawanie grupy przedmiotowej.
                             Wybierz 1 aby studentów dziennych do grupy.
                             Wybierz 2 aby studentów zaocznych do grupy
                             """)
         if choice == "1":
-            add_daily_student_to_group()
+            add_daily_student_to_group(subjectGroupID, subjectGroupName, teacherName)
 
-        if choice=="2":
-            add_weekend_student_to_group()
+        if choice == "2":
+            add_weekend_student_to_group(subjectGroupID, subjectGroupName, teacherName)
+            Classes.SubjectGroups.subjectGroupsList.append(
+                Classes.SubjectGroups(subjectGroupName, subjectGroupID, "Zaoczne", teacherName, studentNames))
+
         else:
             os.system('cls')
             print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
@@ -111,16 +107,17 @@ def add_subject_group():
 
     if choice == "2":
         os.system('cls')
-        add_mathemployee_to_group()
+        teacherName = add_mathemployee_to_group()
         choice = input("""Dodawanie grupy przedmiotowej.
                             Wybierz 1 aby dodać studentów dziennych do grupy.
                             Wybierz 2 aby dodać studentów zaocznych do grupy
                             """)
         if choice == "1":
-            add_daily_student_to_group()
+            add_daily_student_to_group(subjectGroupID, subjectGroupName, teacherName)
 
         if choice == "2":
-            add_weekend_student_to_group()
+            add_weekend_student_to_group(subjectGroupID, subjectGroupName, teacherName)
+
         else:
             os.system('cls')
             print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
@@ -132,9 +129,6 @@ def add_subject_group():
                 """)
         add_subject_group()
 
-    subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write("\n")
-    subjectgroups.close()
     os.system('cls')
     print("Pomyślnie dodano grupe przedmiotowa")
     print()
@@ -156,14 +150,12 @@ def add_itemployee_to_group():
         add_subject_group()
     choice -= 1
     teacherName = Classes.ITEmployee.itEmployeeList[choice].firstname + " " + Classes.ITEmployee.itEmployeeList[choice].lastname
-    subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write("Imię i nazwisko prowadzącego: " + teacherName+"\t")
-    subjectgroups.close()
+    return teacherName
 
 
 def add_mathemployee_to_group():
     j = 1
-    for i in Classes.MathEmployee.mathEmployeeListt:
+    for i in Classes.MathEmployee.mathEmployeeList:
         print(j, '. ', i)
         j += 1
     try:
@@ -176,12 +168,12 @@ def add_mathemployee_to_group():
         add_subject_group()
     choice -= 1
     teacherName = Classes.MathEmployee.mathEmployeeList[choice].firstname + " " + Classes.MathEmployee.mathEmployeeList[choice].lastname
-    subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write("Imię i nazwisko prowadzącego: " + teacherName + "\t")
-    subjectgroups.close()
+    return teacherName
+
+studentNames = []
 
 
-def add_daily_student_to_group():
+def add_daily_student_to_group(subjectGroupID, subjectGroupName, teacherName):
     j = 1
     for i in Classes.DailyStudent.dailyStudentList:
         print(j, '. ', i)
@@ -196,20 +188,21 @@ def add_daily_student_to_group():
         add_subject_group()
     choice -= 1
     nameOfStudent = Classes.DailyStudent.dailyStudentList[choice].firstname + " " + Classes.DailyStudent.dailyStudentList[choice].lastname
-    subjectgroups = open("grupyprzedmiotowe.txt", "a")
-    subjectgroups.write("Imię i nazwisko studenta: " +nameOfStudent + "\t")
-    subjectgroups.close()
-
-    choice=input("""
-    Wybierz 1 aby dodać kolejnego studenta.
-    Wybierz cokolwiek aby powrócić""")
+    studentNames.append(nameOfStudent)
+    choice = input("""
+                    Wybierz 1 aby dodać kolejnego studenta.
+                    Wybierz cokolwiek aby powrócić""")
     if choice == "1":
-        add_daily_student_to_group()
+        add_daily_student_to_group(subjectGroupID, subjectGroupName, teacherName)
     else:
+        Classes.SubjectGroups.subjectGroupsList.append(
+            Classes.SubjectGroups(subjectGroupName, subjectGroupID, "Dzienne", teacherName, studentNames))
+        os.system('cls')
+        print("Pomyślnie dodano grupe przedmiotowa")
         subject_groups_menu()
 
 
-def add_weekend_student_to_group():
+def add_weekend_student_to_group(subjectGroupID, subjectGroupName, teacherName):
     j = 1
     for i in Classes.WeekendStudent.weekendStudentList:
         print(j, '. ', i)
@@ -224,62 +217,56 @@ def add_weekend_student_to_group():
         add_subject_group()
     choice -= 1
     nameOfStudent = Classes.WeekendStudent.weekendStudentList[choice].firstname + " " + Classes.WeekendStudent.weekendStudentList[choice].lastname
-    subjectgroups = open("grupyprzedmiotowe.txt", "a1")
-    subjectgroups.write("Imię i nazwisko studenta: " +nameOfStudent + "\t")
-    subjectgroups.close()
+    studentNames.append(nameOfStudent)
     choice = input("""
        Wybierz 1 aby dodać kolejnego studenta.
        Wybierz 0 aby powrócić""")
     if choice == "1":
-        add_daily_student_to_group()
+        add_weekend_student_to_group(subjectGroupID, subjectGroupName, teacherName)
     else:
+        Classes.SubjectGroups.subjectGroupsList.append(
+            Classes.SubjectGroups(subjectGroupName, subjectGroupID, "Zaoczne", teacherName, studentNames))
+        os.system('cls')
+        print("Pomyślnie dodano grupe przedmiotowa")
         subject_groups_menu()
 
 
 def delete_subject_group():
-    print("Usuwanie grupy przedmiotowej: ")
-    list = []
-    #wyswietlam
-    with open("grupyprzedmiotowe.txt", "r") as textobj:
-        j=1
-        for i in textobj:
-            print(str(j) + ". " + i)
-            j=j+1
-            list.append(i)
-    textobj.close()
-    if not list:
-        os.system('cls')
-        print("Nie ma nic do usunięcia")
-        subject_groups_menu()
     try:
-        choice = int(input("""Wybierz którą pozycję chcesz usunąć.
+        j = 1
+        print("Usuwanie grupy przedmiotowej")
+        print()
+        if not Classes.SubjectGroups.subjectGroupsList:
+            print("Nic tu nie ma!")
+            choice = input("""Wybierz cokolwiek aby powrócić.
+            """)
+            os.system('cls')
+            subject_groups_menu()
+
+        for i in Classes.SubjectGroups.subjectGroupsList:
+            print(j, '. ', i)
+            j += 1
+        choice = int(input("""Wybierz pozycję którą chcesz usunąć.
         """))
+        choice -= 1  # ponieważ liczymy od 0 a nie od 1
+        Classes.SubjectGroups.subjectGroupsList.pop(choice)
+        os.system('cls')
+        print("Pomyślnie usunięto grupe przedmiotową.")
+        print()
+        subject_groups_menu()
+
     except:
         os.system('cls')
-        print("""Wybrałeś nieprawidłową wartość. spróbuj ponownie
+        print("""Wybrałeś nieprawidłową wartość. Spróbuj ponownie
         """)
-        delete_subject_group()
-
-    list.pop(choice-1)  #usuwam
-
-    # przepisuje
-    with open("grupyprzedmiotowe.txt", "w") as textobj:
-        for n in list:
-            textobj.write(n)
-    textobj.close()
-    os.system('cls')
-    print("Pomyślnie usunięto grupe przedmiotową")
-    print()
-    subject_groups_menu()
+        subject_groups_menu()
 
 
 def show_subject_groups():
-    with open("grupyprzedmiotowe.txt", "r") as textobj:
-        for i in textobj:
-            print (i)
-    textobj.close()
+    for i in Classes.SubjectGroups.subjectGroupsList:
+        print(i)
     choice = input("""Wybierz 0 aby powrócić do poprzedniego menu.
-       """)
+    """)
     if choice == "0":
         os.system('cls')
         import Main
@@ -288,3 +275,11 @@ def show_subject_groups():
         os.system('cls')
         print("Wybrano nieprawidłową wartość. Spróbuj ponownie")
         show_subject_groups()
+
+
+def subject_groups_write_to_file():
+
+    subject_groups = open("grupyprzedmiotowe.txt", "w")
+    for i in Classes.SubjectGroups.subjectGroupsList:
+        subject_groups.write(str(i)+'\n')
+    subject_groups.close()

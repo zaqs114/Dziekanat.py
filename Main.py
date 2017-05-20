@@ -94,7 +94,7 @@ def show_base_menu():
 def stats_menu():
     print("W bazie znajduje się" + str(len(Classes.DailyStudent.dailyStudentList)+len(Classes.WeekendStudent.weekendStudentList)) + " studentów, w tym " + str(len(Classes.DailyStudent.dailyStudentList)) + " studentów dziennych oraz " + str(len(Classes.WeekendStudent.weekendStudentList)) + " studentów zaocznych.")
     print("W bazie jest też " + str(len(Classes.ITEmployee.itEmployeeList)+len(Classes.MathEmployee.mathEmployeeList)) + " pracowników, w tym " + str(len(Classes.ITEmployee.itEmployeeList)) + " informatyków oraz " + str(len(Classes.MathEmployee.mathEmployeeList)) + " matematyków.")
-    print("W bazie mamy " + str(len(Classes.Subjects.subjectList)) + " przedmiotów oraz "+ str(lines()) + " grup przedmiotowych.")
+    print("W bazie mamy " + str(len(Classes.Subjects.subjectList)) + " przedmiotów oraz "+ str(len(Classes.SubjectGroups.subjectGroupsList)) + " grup przedmiotowych.")
     choice = input("""Wybierz 0 aby powrócić
     """)
     if choice == "0":
@@ -106,13 +106,5 @@ def stats_menu():
         print()
         stats_menu()
 
-
-def lines():
-    with open("grupyprzedmiotowe.txt", "r") as textobj:
-        j=0
-        for i in textobj:
-            j=j+1
-    textobj.close()
-    return j
 
 start()

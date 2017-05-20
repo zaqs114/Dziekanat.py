@@ -31,7 +31,7 @@ def employee_write_to_file():
         employees.write(str(i)+'\n')
     for i in Classes.MathEmployee.mathEmployeeList:
         employees.write(str(i)+'\n')
-        employees.close()
+    employees.close()
 
 
 def show_employees():
